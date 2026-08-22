@@ -37,7 +37,28 @@ class LinkedList:
             position += 1
         print("Node not found")
         return -1
-        
+
+    def addnodeinbetween(self, value, position):
+        new_node = Node(value)
+        if position == 0:
+            new_node.next = self.head
+            self.head = new_node
+            if self.tail is None:
+                self.tail = new_node
+            return
+        current = self.head
+        for _ in range(position - 1):
+            if current is None:
+                print("Position out of bounds")
+                return
+            current = current.next
+        if current is None:
+            print("Position out of bounds")
+            return
+        new_node.next = current.next
+        current.next = new_node
+        if new_node.next is None:
+            self.tail = new_node
 
 
     #display linked list
@@ -59,3 +80,5 @@ linkedlistObj.add_node_beg(1)
 linkedlistObj.display()
 linkedlistObj.search_node(20)
 linkedlistObj.search_node(100)
+linkedlistObj.addnodeinbetween(15, 3)
+linkedlistObj.display()
